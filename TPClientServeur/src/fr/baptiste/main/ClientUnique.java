@@ -25,11 +25,13 @@ public class ClientUnique{
 	long total = 0;
 	int totalCount = 0;
 
-	int numWorkers = 8000000;
-
+	int numWorkers = 20000000;
+	int nombreIterations;
 	public ClientUnique(List<String> hosts, List<Integer> ports)  {
 		name += ++count;
 		totalCount = hosts.size();
+		
+		nombreIterations = numWorkers/hosts.size();
 		connexions = new ArrayList<Socket>();
 		tableResponse = new ArrayList<Long>();
 		try {
@@ -54,7 +56,7 @@ public class ClientUnique{
 				reader = new BufferedInputStream(connexion.getInputStream());
 				// On envoie la commande au serveur
 
-				writer.write("" + numWorkers);
+				writer.write("" + nombreIterations);
 				// TOUJOURS UTILISER flush() POUR ENVOYER RÉELLEMENT DES INFOS
 				// AU SERVEUR
 				writer.flush();
@@ -64,15 +66,14 @@ public class ClientUnique{
 				tableResponse.add(Long.parseLong(response));
 				
 
+				total += Long.parseLong(response);
 				System.out.println(tableResponse);
 				writer.write("CLOSE");
 				writer.flush();
 				writer.close();
 			}
 			
-			for(Long e : tableResponse){
-				total += e;
-			}
+			
 			double pi = 4.0 * total / totalCount / numWorkers;
 			System.out.println("PI : " + pi);
 			System.out.println("Difference to exact value of pi: " + (pi - Math.PI));
@@ -96,9 +97,10 @@ public class ClientUnique{
 
 	public static void main(String[] args) {
 		String host = "127.0.0.1";
+		int nb_proc = 1;
 		ArrayList<String> hosts = new ArrayList<String>();
 		ArrayList<Integer> ports = new ArrayList<Integer>();
-		for (int i = 5000; i < 5002; i++) {
+		for (int i = 5000; i < 5000 + nb_proc; i++) {
 			hosts.add(host);
 			ports.add(i);
 		}

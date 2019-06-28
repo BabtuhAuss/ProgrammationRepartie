@@ -67,7 +67,9 @@ public class ServerPi {
 
 	public static void main(String[] args) {
 		String host = "127.0.0.1";
-		for (int i = 5000; i < 5002; i++) {
+		
+		int nb_serveurs = 2;
+		for (int i = 5000; i < 5000+nb_serveurs; i++) {
 			ServerPi ts = new ServerPi(host, i);
 			ts.open();
 		}
