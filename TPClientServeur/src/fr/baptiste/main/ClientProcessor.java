@@ -66,7 +66,6 @@ public class ClientProcessor implements Runnable{
                  debug += " Sur le port : " + remote.getPort() + ".\n";
                  debug += "\t -> Commande reçue : " + response + "\n";
                  System.err.println("\n" + debug);
-                 
                  toSend += circleCount;
                  
                  //On envoie la réponse au client
@@ -80,11 +79,6 @@ public class ClientProcessor implements Runnable{
             }else{
             	closeConnexion = true;
             }
-            
-
-            
-            
-
             
 
             if(closeConnexion){
