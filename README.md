@@ -1,5 +1,5 @@
 # ProgrammationRepartie
-Dépot du projet decrivant l'algorithme de Munte Carlu. de façon parralèlle
+Dépot du projet decrivant l'algorithme de Munte Carlu. de façon paralèlle
 
 Réalisation du Travail à L'IUT DE Vélizy
 
